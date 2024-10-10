@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="QT-DoG: QUANTIZATION-AWARE TRAINING FOR DOMAIN GENERALIZATION">
+  <meta name="keywords" content="Quantization, QAT, Domain Generalization">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QT-DOG: QUANTIZATION-AWARE TRAINING FOR DOMAIN GENERALIZATION</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/quanicon.webp">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero" style="background: linear-gradient(to right, #d2d2ac, #90c7c4);">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size: 6rem;">QT-DoG</h1>
+          <h1 class="title is-1 publication-title" style="font-size: 3rem;">QUANTIZATION-AWARE TRAINING FOR DOMAIN GENERALIZATION</h1>
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <a href="https://saqibjaved1.github.io/">Saqib Javed</a>,</span>
+            <span class="author-block">
+              <a href="https://hieulem.github.io/">Hieu Le</a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=n-B0jr4AAAAJ&hl=en">Mathieu Salzmann</a>
+            </span>
+          </div>
+
+          <div class="centered_div big" style="text-align: center; margin-bottom: 0.5rem; margin-top: 0.5rem;">
+              <div class="div_sidebyside" style="display: inline-block; vertical-align: middle;">
+                  <img src="/static/images/epfl_logo.png" style="width: 200px; height: auto;">
+              </div>
+              <div class="div_sidebyside" style="display: inline-block; vertical-align: middle;">
+                  <a class="page-link" href="https://www.epfl.ch/labs/cvlab/">
+                      <img src="/static/images/cvlab_logo-removebg-preview.png" style="width: 200px; height: auto;">
+                  </a>
+              </div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2410.06020"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2410.06020"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/saqibjaved1/QT-DoG"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/facebookresearch/DomainBed/blob/main/domainbed/datasets.py"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+                </span>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+    <div class="hero-body">
+      <div class="image-comparison has-text-centered">
+      <h3 class=" is-size-4 publication-title">QT-DoG uses weight quantization to achieve flatter minima, improving generalization while reducing model size and computational costs.</h3>
+
+      </div>
+    </div>
+</section>
+
+
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="image-comparison has-text-centered" style="margin-top: -3rem">
+
+        <img src="./static/images/existing_methods.png" alt="Comparison of Existing Methods" style="width: 85%; height: auto;">
+      </div>
+      <h2 class="subtitle has-text-centered" style="margin-top: -0.1rem;margin-bottom: -4rem">
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified" style="margin-bottom: -3rem">
+          <p>
+            Domain Generalization (DG) aims to train models that perform well not only on the training (source) domains but also on novel, unseen target data distributions. A key challenge in DG is preventing overfitting to source domains, which can be mitigated by finding flatter minima in the loss landscape. In this work, we propose Quantization-aware Training for Domain Generalization (QT-DoG) and demonstrate that weight quantization effectively leads to flatter minima in the loss landscape, thereby enhancing domain generalization. Unlike traditional quantization methods focused on model compression, QT-DoG exploits quantization as an implicit regularizer by inducing noise in model weights, guiding the optimization process toward flatter minima that are less sensitive to perturbations and overfitting. We provide both theoretical insights and empirical evidence demonstrating that quantization inherently encourages flatter minima, leading to better generalization across domains. Moreover, with the benefit of reducing the model size through quantization, we demonstrate that an ensemble of multiple quantized models further yields superior accuracy than the state-of-the-art DG approaches with no computational or memory overheads. Our extensive experiments demonstrate that QT-DoG generalizes across various datasets, architectures, and quantization algorithms, and can be combined with other DG methods, establishing its versatility and robustness.
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div style="overflow-x:auto;">
+          <table style="margin: 0 auto; border-collapse: collapse; font-size: 1rem; text-align: center; width: 100%;">
+            <caption style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">Comparison of Best Performing Domain Generalization Methods</caption>
+            <thead>
+              <tr>
+                <th style="background-color: #f2f2f2; padding: 10px;">Algorithm</th>
+                <th style="background-color: #f2f2f2; padding: 10px;">Models</th>
+                <th style="background-color: #f2f2f2; padding: 10px;">Size</th>
+                <th style="background-color: #f2f2f2; padding: 10px;">Avg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px;">ERM</td>
+                <td style="padding: 10px;">1</td>
+                <td style="padding: 10px;">1x</td>
+                <td style="padding: 10px;">63.8</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">SWAD</td>
+                <td style="padding: 10px;">1</td>
+                <td style="padding: 10px;">1x</td>
+                <td style="padding: 10px;">66.9</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">MIRO</td>
+                <td style="padding: 10px;">1</td>
+                <td style="padding: 10px;">1x</td>
+                <td style="padding: 10px;">65.9</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">CCFP</td>
+                <td style="padding: 10px;">1</td>
+                <td style="padding: 10px;">1x</td>
+                <td style="padding: 10px;">64.8</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">CORAL</td>
+                <td style="padding: 10px;">1</td>
+                <td style="padding: 10px;">1x</td>
+                <td style="padding: 10px;">64.1</td>
+              </tr>
+
+              <td class="best-performing" style="padding: 10px; font-weight: bold;">QT-DoG (ours)</td>
+                <td style="padding: 10px;">1</td>
+                <td class="best-performing" style="padding: 10px; font-weight: bold;">0.22x</td>
+                <td style="padding: 10px;">66.2</td>
+              </tr>
+
+              <tr>
+                <td style="padding: 10px;">EoA</td>
+                <td style="padding: 10px;">6</td>
+                <td style="padding: 10px;">6x</td>
+                <td style="padding: 10px; text-decoration: underline;">68.0</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">DiWA</td>
+                <td style="padding: 10px;">60</td>
+                <td style="padding: 10px;">1x</td>
+                <td style="padding: 10px; text-decoration: underline;">68.0</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">ERM Ens.</td>
+                <td style="padding: 10px;">6</td>
+                <td style="padding: 10px;">6x</td>
+                <td style="padding: 10px;">66.8</td>
+              <tr>
+                <td class="best-performing" style="padding: 10px; font-weight: bold;">EoQ (ours)</td>
+                <td style="padding: 10px;">5</td>
+                <td style="padding: 10px;">1.1x</td>
+                <td class="best-performing" style="padding: 10px; font-weight: bold;">68.4</td>
+              </tr>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero">
+        <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <h2 class="title is-3">Visualizations</h2>
+    <div class="content has-text-justified">
+      <p>
+        The figure below showcases GradCAM results from the PACS dataset, illustrating four experiments where each run targets a different domain while using others for training. These visualizations evidence that quantization focuses on better regions than ERM, and with a much larger receptive field. In certain cases, ERM does not even focus on the correct image region. It is quite evident that quantization
+pushes the model to learn more generalized patterns, leading to a model that is less sensitive to the specific details of the training set. These qualitative results confirm the quantitative evidence provided in the Table above.
+      </p>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="image-comparison has-text-centered">
+        <img src="./static/images/GRADCAM.png" alt="GRADCAM Visualizations" style="width: 80%; height: auto;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+        <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <h2 class="title is-3">Loss Flatness Analysis</h2>
+    <div class="content has-text-justified">
+      <p>
+              We demonstrates that incorporating quantization in the Empirical Risk Minimization (ERM) process leads to finding flatter minima. Our analysis indicates that QT-DoG achieves flatter minima compared to both ERM and existing methods such as SAM and SWA.
+            </p>
+            <p>
+              Following the approach of previous work, we quantify local flatness \( \mathcal{F}_\gamma (\mathbf{w}) \) by measuring the expected change in loss values between a model with parameters \( \mathbf{w} \) and a perturbed model \( \mathbf{w}' \) on a sphere of radius \( \gamma \) centered at \( \mathbf{w} \):
+            </p>
+            <p>
+              \[
+              \mathcal{F}_\gamma (\mathbf{w})=\mathbb{E}_{\|\mathbf{w}'\|} \left[\mathcal{E}(\mathbf{w}') - \mathcal{E}(\mathbf{w})\right],
+              \]
+            </p>
+            <p>
+              where \( \mathcal{E}(\mathbf{w}) \) represents the accumulated loss over samples from either source or target domains, depending on the evaluation context.
+            </p>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero">
+
+    <div class="hero-body">
+      <div class="columns is-centered has-text-centered">
+
+      <div class="image-comparison has-text-centered">
+        <img src="./static/images/Loss_flatness.png" alt="Loss Flatness" style="width: 110%; height: auto;">
+      </div>
+
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+<!--  <div class="container is-max-desktop">-->
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -2rem">Quantizing Vision Transformers</h2>
+        <div class="content has-text-justified" style="margin-bottom: 1rem">
+          Comparison of performance on PACS and TerraInc datasets with and without QT-DoG quantization of <a rel="ERM_ViT" href="https://openaccess.thecvf.com/content/ACCV2022/papers/Sultana_Self-Distilled_Vision_Transformer_for_Domain_Generalization_ACCV_2022_paper.pdf">ERM_ViT</a> using the DeiT-Small backbone.
+        </div>
+      </div>
+    </div>
+      <div class="columns is-centered">
+  <div class="container is-max-desktop">
+        <table class="table is-striped is-fullwidth has-text-centered" style="margin-top: 1rem">
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Backbone</th>
+              <th>PACS</th>
+              <th>TerraInc</th>
+              <th>Compression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ERM_ViT</td>
+              <td>DeiT-Small</td>
+              <td>84.3 ± 0.2</td>
+              <td>43.2 ± 0.2</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>ERM-SD_ViT</td>
+              <td>DeiT-Small</td>
+              <td>86.3 ± 0.2</td>
+              <td>44.3 ± 0.2</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>ERM_ViT + QT-DoG</td>
+              <td>DeiT-Small</td>
+              <td>86.2 ± 0.3</td>
+              <td>45.6 ± 0.4</td>
+              <td>4.6x</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+<!--  <div class="container is-max-desktop">-->
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -3rem">Combination with Other Methods</h2>
+        <div class="content has-text-justified" >
+        Results of PACS and Terra Incognita datasets incorporating QT-DoG with CORAL and MixStyle. "Compression" represents the compression factor of the model.
+        </div>
+      </div>
+    </div>
+      <div class="columns is-centered">
+  <div class="container is-max-desktop">
+        <table class="table is-striped is-fullwidth has-text-centered" style="margin-top: 1rem">
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>PACS</th>
+              <th>TerraInc</th>
+              <th>Compression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CORAL</td>
+              <td>85.5 ± 0.6</td>
+              <td>47.1 ± 0.2</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>CORAL + QT-DoG</td>
+              <td>86.9 ± 0.2</td>
+              <td>50.6 ± 0.3</td>
+              <td>4.6x</td>
+            </tr>
+            <tr>
+              <td>MixStyle</td>
+              <td>85.2 ± 0.3</td>
+              <td>44.0 ± 0.4</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>MixStyle + QT-DoG</td>
+              <td>86.8 ± 0.3</td>
+              <td>47.7 ± 0.2</td>
+              <td>4.6x</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero">
+<!--  <div class="container is-max-desktop">-->
+        <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <h2 class="title is-3">Acknowledgments</h2>
+    <div class="content has-text-justified">
+      <p>
+        We thank <a rel="Soumava Roy" href="https://ch.linkedin.com/in/soumava-kumar-roy-1689a2a4">Soumava Roy</a> for assisting with the GradCAM visualizations across different datasets. We also thank <a rel="Chen Zhao" href="https://sailor-z.github.io/">Chen Zhao</a> for his helpful comments and feedback. Moreover, we are grateful to the creators of the <a rel="SWAD" href="https://github.com/khanrc/swad">SWAD</a> and <a rel="LSQ" href="https://github.com/zhutmost/lsq-net">LSQ</a> GitHub repositories, as our code was built upon their work.
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+v
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{javed2024qtdogquantizationawaretrainingdomain,
+      title={QT-DoG: Quantization-aware Training for Domain Generalization},
+      author={Saqib Javed and Hieu Le and Mathieu Salzmann},
+      year={2024},
+      archivePrefix={arXiv},
+      url={https://arxiv.org/abs/2410.06020},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2410.06020">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://saqibjaved1.github.io/" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a rel="Nerfies" href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International Licensec</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
