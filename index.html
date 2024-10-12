@@ -248,7 +248,7 @@
 </section>
 
 
-<section class="hero">
+<section class="section">
         <div class="columns is-centered has-text-centered">
       <div class="column is-half">
         <h2 class="title is-3">Visualizations</h2>
@@ -272,7 +272,7 @@ pushes the model to learn more generalized patterns, leading to a model that is 
   </div>
 </section>
 
-<section class="hero">
+<section class="section">
         <div class="columns is-centered has-text-centered">
       <div class="column is-half">
         <h2 class="title is-3">Loss Flatness Analysis</h2>
@@ -306,7 +306,7 @@ pushes the model to learn more generalized patterns, leading to a model that is 
       <div class="columns is-centered has-text-centered">
 
       <div class="image-comparison has-text-centered">
-        <img src="./static/images/Loss_flatness.png" alt="Loss Flatness" style="width: 110%; height: auto;">
+        <img src="./static/images/Loss_flatness.png" alt="Loss Flatness" style="width: 100%; height: auto;">
       </div>
 
     </div>
@@ -315,18 +315,23 @@ pushes the model to learn more generalized patterns, leading to a model that is 
 </section>
 
 <section class="section">
-<!--  <div class="container is-max-desktop">-->
     <div class="columns is-centered">
       <div class="column is-half">
         <h2 class="title is-3 has-text-centered" style="margin-top: -2rem">Quantizing Vision Transformers</h2>
-        <div class="content has-text-justified" style="margin-bottom: 1rem">
+        <div class="content has-text-justified" style="margin-bottom: -5rem">
           Comparison of performance on PACS and TerraInc datasets with and without QT-DoG quantization of <a rel="ERM_ViT" href="https://openaccess.thecvf.com/content/ACCV2022/papers/Sultana_Self-Distilled_Vision_Transformer_for_Domain_Generalization_ACCV_2022_paper.pdf">ERM_ViT</a> using the DeiT-Small backbone.
         </div>
       </div>
     </div>
-      <div class="columns is-centered">
+</section>
+
+
+<section class="section">
   <div class="container is-max-desktop">
-        <table class="table is-striped is-fullwidth has-text-centered" style="margin-top: 1rem">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div style="overflow-x:auto;">
+          <table class="table is-striped is-fullwidth has-text-centered" style="margin-top: 1rem">
           <thead>
             <tr>
               <th>Algorithm</th>
@@ -360,24 +365,32 @@ pushes the model to learn more generalized patterns, leading to a model that is 
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+
 <section class="section">
-<!--  <div class="container is-max-desktop">-->
     <div class="columns is-centered">
       <div class="column is-half">
         <h2 class="title is-3 has-text-centered" style="margin-top: -3rem">Combination with Other Methods</h2>
-        <div class="content has-text-justified" >
-        Results of PACS and Terra Incognita datasets incorporating QT-DoG with CORAL and MixStyle. "Compression" represents the compression factor of the model.
+  <div class="content has-text-justified" style="margin-bottom: -5rem">
+    Results of PACS and Terra Incognita datasets incorporating QT-DoG with CORAL and MixStyle. "Compression" represents the compression factor of the model.
         </div>
       </div>
     </div>
-      <div class="columns is-centered">
+</section>
+
+
+
+<section class="section">
   <div class="container is-max-desktop">
-        <table class="table is-striped is-fullwidth has-text-centered" style="margin-top: 1rem">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div style="overflow-x:auto;">
+          <table class="table is-striped is-fullwidth has-text-centered" style="margin-top: 1rem">
           <thead>
             <tr>
               <th>Algorithm</th>
@@ -412,27 +425,31 @@ pushes the model to learn more generalized patterns, leading to a model that is 
               <td>4.6x</td>
             </tr>
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 
-<section class="hero">
-<!--  <div class="container is-max-desktop">-->
-        <div class="columns is-centered has-text-centered">
+
+
+<section class="section">
+    <!-- Acknowledgments. -->
+    <div class="columns is-centered has-text-centered">
       <div class="column is-half">
         <h2 class="title is-3">Acknowledgments</h2>
-    <div class="content has-text-justified">
-      <p>
+        <div class="content has-text-justified" style="margin-bottom: -3rem">
+          <p>
         We thank <a rel="Soumava Roy" href="https://ch.linkedin.com/in/soumava-kumar-roy-1689a2a4">Soumava Roy</a> for assisting with the GradCAM visualizations across different datasets. We also thank <a rel="Chen Zhao" href="https://sailor-z.github.io/">Chen Zhao</a> for his helpful comments and feedback. Moreover, we are grateful to the creators of the <a rel="SWAD" href="https://github.com/khanrc/swad">SWAD</a> and <a rel="LSQ" href="https://github.com/zhutmost/lsq-net">LSQ</a> GitHub repositories, as our code was built upon their work.
-    </div>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
 </section>
-v
+
+
 
 
 <section class="section" id="BibTeX">
@@ -466,7 +483,7 @@ v
           <p>
             This website is adapted from <a rel="Nerfies" href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license"
                                                 href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International Licensec</a>.
+            Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
 
         </div>
