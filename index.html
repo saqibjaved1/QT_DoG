@@ -465,7 +465,21 @@ pushes the model to learn more generalized patterns, leading to a model that is 
   </div>
 </section>
 
-
+<script>
+  function copyBibTeX() {
+    var copyText = document.getElementById("bibText");
+    var range = document.createRange();
+    range.selectNode(copyText);
+    window.getSelection().removeAllRanges(); // clear current selection
+    window.getSelection().addRange(range); // to select text
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();// to deselect
+  
+    var button = document.getElementById("copyButton");
+    button.style.backgroundColor = "#808080"; // Change the button color to grey
+    button.innerText = "Copied!"; // Change the button text to "Copied!"
+  }
+</script>
 
 <footer class="footer">
   <div class="container">
