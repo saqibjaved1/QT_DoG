@@ -5,12 +5,19 @@ This is the repository that contains source code for the project page of [QT-DoG
 If you find QT-DoG useful for your work please cite:
 
 ```
-@misc{javed2024qtdogquantizationawaretrainingdomain,
-      title={QT-DoG: Quantization-aware Training for Domain Generalization},
-      author={Saqib Javed and Hieu Le and Mathieu Salzmann},
-      year={2024},
-      archivePrefix={arXiv},
-      url={https://arxiv.org/abs/2410.06020},
+@InProceedings{pmlr-v267-javed25a,
+  title = 	 {{QT}-{D}o{G}: Quantization-Aware Training for Domain Generalization},
+  author =       {Javed, Saqib and Le, Hieu and Salzmann, Mathieu},
+  booktitle = 	 {Proceedings of the 42nd International Conference on Machine Learning},
+  pages = 	 {26981--27004},
+  year = 	 {2025},
+  editor = 	 {Singh, Aarti and Fazel, Maryam and Hsu, Daniel and Lacoste-Julien, Simon and Berkenkamp, Felix and Maharaj, Tegan and Wagstaff, Kiri and Zhu, Jerry},
+  volume = 	 {267},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {13--19 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://raw.githubusercontent.com/mlresearch/v267/main/assets/javed25a/javed25a.pdf},
+  url = 	 {https://proceedings.mlr.press/v267/javed25a.html}
 }
 ```
 
